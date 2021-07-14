@@ -1,0 +1,28 @@
+# IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__
+*.py[cod]
+
+# Environment
+.env
+/venv/
+
+# OS
+.DS_Store
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Runtime
+pids
+*.pid
+*.seed
+dist
+
+# Logs
+logs
+*.log
+npm-debug.log

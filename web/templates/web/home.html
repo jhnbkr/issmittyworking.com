@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>Is Smitty Working?</title>
+
+    <style>
+        body {
+            color: white;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+
+        body.is-working {
+            background: green;
+        }
+
+        body.not-working {
+            background: red;
+        }
+
+        .big {
+            font-size: 25vw;
+            font-weight: bold;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="{% if is_working %}is-working{% else %}not-working{% endif %}">
+<div class="big center">{% if is_working %}YES{% else %}NO{% endif %}</div>
+</body>
+</html>
