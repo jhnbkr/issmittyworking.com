@@ -30,6 +30,7 @@ SCHEDULE_START_DATE = datetime.datetime.strptime(
     ENV.str("SCHEDULE_START_DATE"), "%Y-%m-%d"
 ).date()
 SECRET_KEY = ENV.str("SECRET_KEY")
+SECURE_SSL_REDIRECT = ENV.bool("SECURE_SSL_REDIRECT", default=True)
 TIME_ZONE = ENV.str("TIME_ZONE", default="UTC")
 USE_TZ = True
 
