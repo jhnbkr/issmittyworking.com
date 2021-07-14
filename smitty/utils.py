@@ -1,9 +1,10 @@
 import datetime
 from typing import Tuple
-from django.utils.timezone import localtime, now
+
 import holidays
 from django.conf import settings
 from django.utils.functional import classproperty
+from django.utils.timezone import localtime, now
 
 
 class Schedule:
