@@ -7,4 +7,4 @@ run:
 	python manage.py runserver 0.0.0.0:8000
 
 web:
-	gunicorn app:app --log-file -
+	gunicorn project.wsgi --log-file -
