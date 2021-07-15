@@ -26,7 +26,11 @@ class Schedule:
 
     @classmethod
     def utc_to_sst(cls, timestamp) -> datetime.datetime:
-        utc_dt = datetime.datetime.utcfromtimestamp(timestamp)
+        try:
+            utc_dt = datetime.datetime.utcfromtimestamp(timestamp)
+        except (ValueError, OverflowError):
+            utc_dt = datetime.datetime.utcnow()
+
         local_tz = pytz.timezone(settings.TIME_ZONE)
         return utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
 
