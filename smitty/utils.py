@@ -1,4 +1,5 @@
 import datetime
+import time
 from typing import Tuple
 
 import holidays
@@ -25,12 +26,12 @@ class Schedule:
         return settings.SCHEDULE_SHIFT_B_START, settings.SCHEDULE_SHIFT_B_END
 
     @classmethod
-    def utc_to_sst(cls, timestamp) -> datetime.datetime:
-        try:
-            utc_dt = datetime.datetime.utcfromtimestamp(timestamp)
-        except (ValueError, OverflowError):
-            utc_dt = datetime.datetime.utcnow()
+    def timestamp_now(cls) -> int:
+        return int(time.time())
 
+    @classmethod
+    def utc_to_sst(cls, timestamp) -> datetime.datetime:
+        utc_dt = datetime.datetime.utcfromtimestamp(timestamp)
         local_tz = pytz.timezone(settings.TIME_ZONE)
         return utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
 

@@ -16,11 +16,14 @@ class HomeView(TemplateView):
                 return int(self.request.GET["timestamp"])
             except ValueError:
                 pass
-        return int(time.time())
+        return Schedule.timestamp_now()
 
     @property
     def sst(self) -> datetime.datetime:
-        return Schedule.utc_to_sst(self.timestamp)
+        try:
+            return Schedule.utc_to_sst(self.timestamp)
+        except (ValueError, OverflowError):
+            return Schedule.utc_to_sst(Schedule.timestamp_now())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

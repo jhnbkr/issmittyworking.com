@@ -1,11 +1,7 @@
-import time
-
 from rest_framework import serializers
 
-
-def now() -> int:
-    return int(time.time())
+from smitty.utils import Schedule
 
 
 class ScheduleSerializer(serializers.Serializer):
-    timestamp = serializers.IntegerField(default=now)
+    timestamp = serializers.IntegerField(default=Schedule.timestamp_now)

@@ -14,7 +14,11 @@ class ScheduleView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         timestamp = serializer.validated_data["timestamp"]
-        sst = Schedule.utc_to_sst(timestamp)
+
+        try:
+            sst = Schedule.utc_to_sst(timestamp)
+        except (ValueError, OverflowError):
+            sst = Schedule.utc_to_sst(Schedule.timestamp_now())
 
         return Response(
             {
