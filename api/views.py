@@ -13,15 +13,14 @@ class ScheduleView(GenericAPIView):
         serializer = self.get_serializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
 
-        date = serializer.validated_data["date"]
-        time = serializer.validated_data["time"].replace(microsecond=0)
+        timestamp = serializer.validated_data["timestamp"]
+        sst = Schedule.utc_to_sst(timestamp)
 
         return Response(
             {
-                "date": date,
-                "time": time,
-                "is_holiday": Schedule.is_holiday(date),
-                "is_working": Schedule.is_working(date, time),
+                "utc": timestamp,
+                "sst": sst,
+                "is_working": Schedule.is_working(sst),
             },
             status=status.HTTP_200_OK,
         )

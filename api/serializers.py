@@ -1,13 +1,11 @@
-from django.conf import settings
+import time
+
 from rest_framework import serializers
 
-from smitty.utils import Schedule
+
+def now() -> int:
+    return int(time.time())
 
 
 class ScheduleSerializer(serializers.Serializer):
-    date = serializers.DateField(
-        default=Schedule.get_date_now, format=settings.SCHEDULE_FORMAT_DATE
-    )
-    time = serializers.TimeField(
-        default=Schedule.get_time_now, format=settings.SCHEDULE_FORMAT_TIME
-    )
+    timestamp = serializers.IntegerField(default=now)

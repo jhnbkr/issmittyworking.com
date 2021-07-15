@@ -2,9 +2,9 @@ import datetime
 from typing import Tuple
 
 import holidays
+import pytz
 from django.conf import settings
 from django.utils.functional import classproperty
-from django.utils.timezone import localtime, now
 
 
 class Schedule:
@@ -25,19 +25,20 @@ class Schedule:
         return settings.SCHEDULE_SHIFT_B_START, settings.SCHEDULE_SHIFT_B_END
 
     @classmethod
-    def get_date_now(cls):
-        return localtime(now()).date()
-
-    @classmethod
-    def get_time_now(cls):
-        return localtime(now()).time().replace(microsecond=0)
+    def utc_to_sst(cls, timestamp) -> datetime.datetime:
+        utc_dt = datetime.datetime.utcfromtimestamp(timestamp)
+        local_tz = pytz.timezone(settings.TIME_ZONE)
+        return utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
 
     @classmethod
     def is_holiday(cls, date: datetime.date) -> bool:
         return date in holidays.Canada(prov=settings.SCHEDULE_PROVINCE)
 
     @classmethod
-    def is_working(cls, date: datetime.date, time: datetime.time) -> bool:
+    def is_working(cls, sst: datetime.datetime) -> bool:
+        date = sst.date()
+        time = sst.time()
+
         delta_days = (date - cls.start_date).days
         delta_periods = int((delta_days - (delta_days % cls.period)) / cls.period)
 
