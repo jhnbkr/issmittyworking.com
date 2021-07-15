@@ -45,7 +45,7 @@ class Schedule:
         # odd periods are off
         is_period_on = delta_periods % 2 == 0
 
-        if is_period_on and not Schedule.is_holiday(date):
+        if is_period_on and not cls.is_holiday(date):
             on_periods = int(delta_periods / 2)
 
             # even on periods are shift a
