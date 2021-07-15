@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.views.generic import TemplateView
 
 from smitty.utils import Schedule
@@ -13,7 +14,7 @@ class HomeView(TemplateView):
         if "date" in self.request.GET:
             try:
                 return datetime.datetime.strptime(
-                    self.request.GET["date"], "%Y-%m-%d"
+                    self.request.GET["date"], settings.SCHEDULE_FORMAT_DATE
                 ).date()
             except ValueError:
                 pass
@@ -25,7 +26,7 @@ class HomeView(TemplateView):
         if "time" in self.request.GET:
             try:
                 return datetime.datetime.strptime(
-                    self.request.GET["time"], "%H:%M:%S"
+                    self.request.GET["time"], settings.SCHEDULE_FORMAT_TIME
                 ).time()
             except ValueError:
                 pass

@@ -68,22 +68,24 @@ REST_FRAMEWORK = {
 
 # region Schedule
 
+SCHEDULE_FORMAT_DATE = "%Y-%m-%d"
+SCHEDULE_FORMAT_TIME = "%H:%M:%S"
 SCHEDULE_PERIOD = ENV.int("SCHEDULE_PERIOD", default=4)
 SCHEDULE_PROVINCE = ENV.str("SCHEDULE_PROVINCE", default="AB")
 SCHEDULE_SHIFT_A_START = datetime.datetime.strptime(
-    ENV.str("SCHEDULE_SHIFT_A_START"), "%H:%M:%S"
+    ENV.str("SCHEDULE_SHIFT_A_START"), SCHEDULE_FORMAT_TIME
 ).time()
 SCHEDULE_SHIFT_A_END = datetime.datetime.strptime(
-    ENV.str("SCHEDULE_SHIFT_A_END"), "%H:%M:%S"
+    ENV.str("SCHEDULE_SHIFT_A_END"), SCHEDULE_FORMAT_TIME
 ).time()
 SCHEDULE_SHIFT_B_START = datetime.datetime.strptime(
-    ENV.str("SCHEDULE_SHIFT_B_START"), "%H:%M:%S"
+    ENV.str("SCHEDULE_SHIFT_B_START"), SCHEDULE_FORMAT_TIME
 ).time()
 SCHEDULE_SHIFT_B_END = datetime.datetime.strptime(
-    ENV.str("SCHEDULE_SHIFT_B_END"), "%H:%M:%S"
+    ENV.str("SCHEDULE_SHIFT_B_END"), SCHEDULE_FORMAT_TIME
 ).time()
 SCHEDULE_START_DATE = datetime.datetime.strptime(
-    ENV.str("SCHEDULE_START_DATE"), "%Y-%m-%d"
+    ENV.str("SCHEDULE_START_DATE"), SCHEDULE_FORMAT_DATE
 ).date()
 
 # endregion
