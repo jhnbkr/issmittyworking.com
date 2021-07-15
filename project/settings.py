@@ -14,6 +14,7 @@ if os.path.exists(env_path):
 
 ALLOWED_HOSTS = ENV.list("ALLOWED_HOSTS", default=[])
 DEBUG = ENV.bool("DEBUG", default=False)
+CORS_ALLOW_ALL_ORIGINS = ENV.bool("CORS_ALLOW_ALL_ORIGINS", default=True)
 SECRET_KEY = ENV.str("SECRET_KEY")
 SECURE_SSL_REDIRECT = ENV.bool("SECURE_SSL_REDIRECT", default=True)
 TIME_ZONE = ENV.str("TIME_ZONE", default="UTC")
@@ -23,6 +24,7 @@ ROOT_URLCONF = "project.urls"
 USE_TZ = True
 
 INSTALLED_APPS = [
+    "corsheaders",
     "rest_framework",
     "django.contrib.auth",
     "django.contrib.contenttypes",
